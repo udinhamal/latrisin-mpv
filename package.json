@@ -1,0 +1,21 @@
+{
+  "name": "larisin-mvp",
+  "version": "0.1.0",
+  "description": "LARISin-like UMKM promo copilot (MVP) - Express + Puppeteer",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "NODE_ENV=development node server.js",
+    "postinstall": "node scripts/check-puppeteer.js"
+  },
+  "dependencies": {
+    "archiver": "^7.0.1",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "multer": "^1.4.5-lts.1",
+    "node-fetch": "^3.3.2",
+    "puppeteer": "^23.4.1",
+    "uuid": "^9.0.1"
+  }
+}
