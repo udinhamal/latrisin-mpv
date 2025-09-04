@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LARISin (MVP)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { theme: { extend: { colors: { brand:'#F0B90B', dark:'#0B1221' } } } };
+  </script>
+  <style>
+    html,body{height:100%;background:#0B1221;color:#E6EAF2}
+    .card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,.06);border-radius:16px}
+    .btn{background:#F0B90B;color:#0B1221;font-weight:800;border-radius:12px;padding:.75rem 1rem}
+    .btn:disabled{opacity:.5}
+    .chip{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);padding:.35rem .6rem;border-radius:999px}
+    .input{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);padding:.6rem .8rem;border-radius:.75rem;width:100%}
+    .label{opacity:.85}
+    .mono{font-family: ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}
+  </style>
+</head>
+<body class="min-h-full">
+  <header class="max-w-6xl mx-auto px-4 py-6 flex items-center justify-between">
+    <div class="text-2xl font-black tracking-tight"><span class="text-brand">LARIS</span>in <span class="text-xs font-medium opacity-70">MVP</span></div>
+    <div class="opacity-80">Copilot promosi untuk UMKM — caption, poster, dan kalender 7 hari.</div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-6 pb-24">
+    <!-- Left: Form -->
+    <section class="card p-6">
+      <h2 class="text-xl font-bold mb-4">Informasi Produk</h2>
+      <div class="grid grid-cols-1 gap-3">
+        <div>
+          <div class="label mb-1">Nama Produk*</div>
+          <input id="product_name" class="input" placeholder="Kopi Susu Gula Aren">
+        </div>
+        <div>
+          <div class="label mb-1">Kategori</div>
+          <input id="product_category" class="input" placeholder="Makanan & Minuman">
+        </div>
+        <div>
+          <div class="label mb-1">Harga (IDR)</div>
+          <input id="product_price" class="input" type="number" placeholder="18000">
+        </div>
+        <div>
+          <div class="label mb-1">Manfaat/Keunggulan Utama*</div>
+          <textarea id="product_benefits" class="input" rows="3" placeholder="Dibuat dari biji kopi pilihan, gula aren asli 100%, tanpa pengawet."></textarea>
+        </div>
+        <div>
+          <div class="label mb-1">Target Audiens</div>
+          <input id="product_audience" class="input" placeholder="Mahasiswa & pekerja 20–35 tahun">
+        </div>
+        <div>
+          <div class="label mb-1">Foto Produk (URL opsional)</div>
+          <input id="product_photo" class="input" placeholder="https://...jpg">
+        </div>
+      </div>
+
+      <h2 class="text-xl font-bold mt-6 mb-2">Informasi Toko</h2>
+      <div class="grid grid-cols-1 gap-3">
+        <div>
+          <div class="label mb-1">Nama Brand/Toko</div>
+          <input id="shop_name" class="input" placeholder="Kopi Kita">
+        </div>
+        <div>
+          <div class="label mb-1">Alamat</div>
+          <input id="shop_address" class="input" placeholder="Jl. Merdeka No.45, Bandung">
+        </div>
+        <div>
+          <div class="label mb-1">Link Google Maps</div>
+          <input id="shop_maps" class="input" placeholder="https://maps.app.goo.gl/...">
+        </div>
+        <div>
+          <div class="label mb-1">Nomor WhatsApp (E.164)*</div>
+          <input id="shop_wa" class="input" placeholder="6281234567890">
+        </div>
+      </div>
+
+      <h2 class="text-xl font-bold mt-6 mb-2">Opsi Lanjutan</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+        <div>
+          <div class="label mb-1">Gaya Bahasa</div>
+          <select id="tone" class="input">
+            <option>Kasual & Ramah</option>
+            <option>Profesional</option>
+            <option>Lucu</option>
+            <option>Religius & Sopan</option>
+          </select>
+        </div>
+        <div>
+          <div class="label mb-1">Platform Promosi</div>
+          <div class="flex flex-wrap gap-2">
+            <label class="chip"><input type="checkbox" class="mr-1" value="instagram" checked>Instagram</label>
+            <label class="chip"><input type="checkbox" class="mr-1" value="facebook">Facebook</label>
+            <label class="chip"><input type="checkbox" class="mr-1" value="whatsapp" checked>WhatsApp</label>
+            <label class="chip"><input type="checkbox" class="mr-1" value="tiktok">TikTok</label>
+            <label class="chip"><input type="checkbox" class="mr-1" value="threads">Threads</label>
+            <label class="chip"><input type="checkbox" class="mr-1" value="marketplace">Marketplace</label>
+          </div>
+        </div>
+        <div>
+          <div class="label mb-1">Tema Visual</div>
+          <select id="theme" class="input">
+            <option>Minimalis & Bersih</option>
+            <option>Ceria & Colorful</option>
+            <option>Elegan & Premium</option>
+          </select>
+        </div>
+        <div>
+          <div class="label mb-1">Warna Dominan</div>
+          <input id="colors" class="input" placeholder="#0B2447, #FFD700">
+        </div>
+        <div>
+          <div class="label mb-1">Pilih Rasio Aspek</div>
+          <div class="flex flex-wrap gap-2">
+            <label class="chip"><input type="checkbox" class="mr-1" value="1:1" checked>1:1</label>
+            <label class="chip"><input type="checkbox" class="mr-1" value="4:5">4:5 (Portrait)</label>
+            <label class="chip"><input type="checkbox" class="mr-1" value="9:16">9:16 (Story)</label>
+            <label class="chip"><input type="checkbox" class="mr-1" value="16:9">16:9 (Landscape)</label>
+          </div>
+        </div>
+        <div>
+          <div class="label mb-1">Jumlah Variasi Caption</div>
+          <select id="variants" class="input">
+            <option>3</option>
+            <option>5</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="mt-6 flex gap-3">
+        <button id="btn_generate" class="btn">Generate Konten Saja</button>
+        <button id="btn_package" class="btn">🚀 Generate Paket Marketing</button>
+      </div>
+      <div id="status" class="mt-3 text-sm opacity-80"></div>
+    </section>
+
+    <!-- Right: Results -->
+    <section class="space-y-6">
+      <div class="card p-6">
+        <h3 class="text-lg font-bold mb-3">Hasil Caption</h3>
+        <div id="captions_area" class="space-y-4"></div>
+      </div>
+
+      <div class="card p-6">
+        <h3 class="text-lg font-bold mb-3">Poster Terbuat</h3>
+        <div id="images_area" class="grid grid-cols-2 gap-3"></div>
+      </div>
+
+      <div class="card p-6">
+        <h3 class="text-lg font-bold mb-3">Kalender Posting 7 Hari</h3>
+        <div id="plan_area" class="space-y-2"></div>
+      </div>
+
+      <div class="card p-6">
+        <h3 class="text-lg font-bold mb-3">Export</h3>
+        <button id="btn_zip" disabled class="btn">⬇️ Download Paket (.zip)</button>
+        <div id="zip_link" class="mt-2 text-sm"></div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const $ = (id) => document.getElementById(id);
+    const getPlatforms = () => Array.from(document.querySelectorAll('label input[type=checkbox]'))
+      .filter(i => i.parentElement.parentElement.previousElementSibling?.textContent?.includes('Platform') && i.checked)
+      .map(i => i.value);
+    const getRatios = () => Array.from(document.querySelectorAll('label input[type=checkbox]'))
+      .filter(i => i.parentElement.parentElement.previousElementSibling?.textContent?.includes('Rasio') && i.checked)
+      .map(i => i.value);
+
+    function gatherForm(){
+      const product = {
+        name: $('product_name').value,
+        category: $('product_category').value,
+        price: Number($('product_price').value || 0),
+        benefits: $('product_benefits').value,
+        audience: $('product_audience').value,
+        photo_url: $('product_photo').value
+      };
+      const shop = {
+        name: $('shop_name').value,
+        address: $('shop_address').value,
+        google_maps_url: $('shop_maps').value,
+        whatsapp_e164: $('shop_wa').value
+      };
+      return { product, shop };
+    }
+
+    function cardPlatform(title, html){ 
+      return `<div class="p-3 rounded-lg border border-white/10">
+        <div class="font-bold mb-2">${title}</div>
+        ${html}
+      </div>`;
+    }
+
+    function renderCaptions(outputs){
+      const area = $('captions_area');
+      area.innerHTML = '';
+      Object.keys(outputs).forEach(plat => {
+        const list = outputs[plat] || [];
+        const items = list.map((v, i) => {
+          const hashtags = (v.hashtags||[]).join(' ');
+          const body = `<div class="space-y-2">
+              <div class="text-sm opacity-70 mb-1">Varian ${i+1}</div>
+              <textarea class="input mono" rows="5">${v.caption}</textarea>
+              ${hashtags ? `<div class="mono text-sm opacity-80">${hashtags}</div>` : ''}
+              <div class="flex gap-2">
+                <button class="chip" onclick="navigator.clipboard.writeText(\`${(v.caption||'').replaceAll('`','\`')}\`)">Salin Caption</button>
+                ${hashtags ? `<button class="chip" onclick="navigator.clipboard.writeText('${hashtags}')">Salin Hashtag</button>`:''}
+              </div>
+          </div>`;
+          return body;
+        }).join('');
+        area.innerHTML += cardPlatform(plat.toUpperCase(), items);
+      });
+    }
+
+    function renderImages(files){
+      const area = $('images_area');
+      area.innerHTML = files.map(f => `<a href="${f}" target="_blank"><img src="${f}" class="rounded-lg border border-white/10"/></a>`).join('');
+    }
+
+    function renderPlan(plan){
+      const area = $('plan_area');
+      area.innerHTML = plan.map(p => `<div class="p-3 border border-white/10 rounded-lg">
+        <div class="font-bold">${p.date}</div>
+        <div class="text-sm opacity-80">Platform: ${p.platforms.join(', ')}</div>
+        <div class="mt-1">${p.idea}</div>
+        <div class="mt-1 text-sm opacity-90">${p.caption}</div>
+      </div>`).join('');
+    }
+
+    let lastOutputs = { captions:null, plan:null, files:[] };
+
+    async function generateAll(){
+      $('status').textContent = 'Memproses...';
+      $('btn_generate').disabled = true; $('btn_package').disabled = true;
+      const { product, shop } = gatherForm();
+      const tone = $('tone').value;
+      const platforms = getPlatforms();
+      const theme = $('theme').value;
+      const colors = $('colors').value ? $('colors').value.split(',').map(s => s.trim()) : ['#0B2447','#FFD700'];
+      const aspect_ratios = getRatios();
+
+      // 1) Captions
+      const capRes = await fetch('/api/generate/caption', {
+        method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({ product, shop, tone, platforms })
+      }).then(r => r.json());
+      if(!capRes.ok) throw new Error(capRes.error || 'Gagal caption');
+      renderCaptions(capRes.outputs);
+
+      // 2) Posters
+      const posRes = await fetch('/api/generate/poster', {
+        method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({ product, shop, theme, dominant_colors: colors, aspect_ratios })
+      }).then(r => r.json());
+      if(!posRes.ok) throw new Error(posRes.error || 'Gagal poster');
+      renderImages(posRes.files);
+
+      // 3) Plan
+      const planRes = await fetch('/api/schedule/plan', {
+        method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({ product, shop, tone, platforms })
+      }).then(r => r.json());
+      if(!planRes.ok) throw new Error(planRes.error || 'Gagal plan');
+      renderPlan(planRes.plan);
+
+      lastOutputs = { captions: capRes.outputs, plan: planRes.plan, files: posRes.files };
+      $('btn_zip').disabled = false;
+      $('status').textContent = 'Selesai ✅';
+    }
+
+    $('btn_generate').addEventListener('click', () => generateAll().catch(err => {
+      $('status').textContent = 'Gagal: ' + err.message;
+      $('btn_generate').disabled = false; $('btn_package').disabled = false;
+    }).finally(()=>{ $('btn_generate').disabled = false; $('btn_package').disabled = false; }));
+
+    $('btn_package').addEventListener('click', () => generateAll());
+
+    $('btn_zip').addEventListener('click', async () => {
+      const res = await fetch('/api/export/zip', {
+        method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify(lastOutputs)
+      }).then(r => r.json());
+      if(res.ok){
+        $('zip_link').innerHTML = `<a class="underline" href="${res.url}">Download Paket Marketing</a>`;
+      }
+    });
+  </script>
+</body>
+</html>
